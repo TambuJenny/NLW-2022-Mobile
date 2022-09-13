@@ -1,53 +1,37 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {  StatusBar } from "react-native";
 
-function Button() {
-  return (
-    <TouchableOpacity style ={styleButton.button}>
-      <Text style ={styleButton.text}>Hello React-Native</Text>
-    </TouchableOpacity>
-  );
-}
+
+import {
+  useFonts,
+  Inter_400Regular,
+  Inter_600SemiBold,
+  Inter_700Bold,
+  Inter_900Black
+} from "@expo-google-fonts/inter";
+
+import { Background } from "./src/components/Background/Index";
+import { Home } from "./src/screens/Home";
+import { Loading } from "./src/components/Loading";
+
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    useFonts,
+    Inter_400Regular,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Inter_900Black,
+  });
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Mc Tambu</Text>
-      <Button ></Button>
-      <StatusBar style="auto" />
-    </View>
+    <Background>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="transparent"
+        translucent
+      />
+     
+      { !fontsLoaded ? <Home /> : <Loading/> }
+
+    </Background>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "black",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  title: {
-    color: "white",
-    fontSize: 12
-  }
-});
-
-const styleButton = StyleSheet.create({
-
-  text:
-  {
-    color: "#F5EDDC",
-    fontSize:12
-  },
-
-  button:
-  {
-      backgroundColor: "#E94560",
-
-      margin: 25,
-      padding: 15,
-      borderRadius: 5,
-
-  }
-
-
-});
